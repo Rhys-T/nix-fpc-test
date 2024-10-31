@@ -1,4 +1,4 @@
-# `fpc` seems to bypass the linker wrapper on certain macOS machines, even with the same `.drv`
+# NixOS/nixpkgs#352655: `fpc` seems to bypass the linker wrapper on certain macOS machines, even with the same `.drv`
 
 ### Describe the bug
 Derivations I've written that use the Free Pascal compiler `fpc` build successfully on my local machine (`x86_64-darwin`, macOS 10.15.7), but when I try to build them on GitHub Actions using the `macos-13` runner, the linker outputs various warnings and errors that don't happen locally, and the build fails.
