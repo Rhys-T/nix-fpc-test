@@ -15,8 +15,6 @@ The really weird part is that the derivation is evaluating to an identical (both
 
 Examining the log closer, I see no evidence that the linker wrapper is being called in the GitHub case. There are no references to `ld-params.XXXXXX` tempfiles in its build log, only `cc-params.XXXXXX` ones. The local log has both. And the arguments that `ld` is complaining about aren't mentioned anywhere in GitHub's version of the log, but they're present locally.
 
-I have no idea whether the problem is in Nix, Nixpkgs, `fpc`, GitHub, [cachix/install-nix-action](https://github.com/cachix/install-nix-action), or something else I haven't even considered, so I apologize if this is the wrong place to open this issue. About the only thing I've managed to eliminate is [the actual program I was originally trying to package](https://drl.chaosforge.org).
-
 ### Steps To Reproduce
 Steps to reproduce the behavior:
 1. Clone [Rhys-T/nix-fpc-test](https://github.com/Rhys-T/nix-fpc-test) on an Intel Mac. It contains two Nix files: 
@@ -38,6 +36,8 @@ N/A
 
 ### Additional context
 While my example derivations here have `NIX_DEBUG=7` set, the problem happens without that variable too.
+
+I have no idea whether the problem is in Nix, Nixpkgs, `fpc`, GitHub, [cachix/install-nix-action](https://github.com/cachix/install-nix-action), or something else I haven't even considered, so I apologize if this is the wrong place to open this issue. About the only thing I've managed to eliminate is [the actual program I was originally trying to package](https://drl.chaosforge.org).
 <!-- Add any other context about the problem here. -->
 
 <!-- ### Notify maintainers -->
