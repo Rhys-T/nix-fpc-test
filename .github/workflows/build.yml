@@ -1,0 +1,27 @@
+name: "Test `fpc` inside Nix"
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    strategy:
+      matrix:
+        lang: [C, FPC]
+    name: Build ${{ matrix.lang }} program
+    runs-on: macos-13
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    - name: Install nix
+      uses: cachix/install-nix-action@v30
+      with:
+        nix_path: "nixpkgs=https://github.com/NixOS/nixpkgs/archive/refs/heads/nixpkgs-unstable.tar.gz"
+    - name: Build
+      run: nix-build "$(tr A-Z a-z <<< ${{ matrix.lang }})-test.nix"
+    - name: Upload logs
+      if: '!cancelled()'
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ matrix.lang }}-build-log
+        path: |
+          /nix/var/log/nix/drvs/*/*aaa-*-test*
+        if-no-files-found: ignore
