@@ -19,7 +19,7 @@ I have no idea whether the problem is in Nix, Nixpkgs, `fpc`, GitHub, cachix/ins
 
 ### Steps To Reproduce
 Steps to reproduce the behavior:
-1. Clone Rhys-T/nix-fpc-test on a Mac. It contains two Nix files: 
+1. Clone [Rhys-T/nix-fpc-test](https://github.com/Rhys-T/nix-fpc-test) on a Mac. It contains two Nix files: 
    - `fpc-test.nix` builds a simple Hello World program using Free Pascal, which links in `libm` (and doesn't really do anything with it.)
    - `c-test.nix` is basically the same thing, but in C. It also links `libm`.
 2. Build each program and test it.
