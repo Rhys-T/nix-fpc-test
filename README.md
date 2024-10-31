@@ -24,7 +24,7 @@ Steps to reproduce the behavior:
    - `c-test.nix` is basically the same thing, but in C. It also links `libm`.
 2. Build each program with <code>NIX_PATH='nixpkgs=https://github.com/NixOS/nixpkgs/archive/refs/heads/nixpkgs-unstable.tar.gz' nix-build <var>lang</var>-test.nix</code> and test it.
 3. Fork the repo on GitHub, and enable actions.
-4. Run the "Test fpc inside Nix" workflow. A job will appear for each of the test files.
+4. Trigger the "Test `fpc` inside Nix" workflow manually. A job will appear for each of the test files.
 5. The C test will build successfully, but the Free Pascal one will fail with the errors I mentioned above.
 6. The `.drv`s and build logs for both test programs will be uploaded as artifacts for the workflow.
 7. Compare the `.drv`s with the ones from your local system. The names and contents should be identical.
