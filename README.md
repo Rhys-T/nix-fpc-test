@@ -19,15 +19,15 @@ I have no idea whether the problem is in Nix, Nixpkgs, `fpc`, GitHub, cachix/ins
 
 ### Steps To Reproduce
 Steps to reproduce the behavior:
-1. Clone [Rhys-T/nix-fpc-test](https://github.com/Rhys-T/nix-fpc-test) on a Mac. It contains two Nix files: 
+1. Clone [Rhys-T/nix-fpc-test](https://github.com/Rhys-T/nix-fpc-test) on an Intel Mac. It contains two Nix files: 
    - `fpc-test.nix` builds a simple Hello World program using Free Pascal, which links in `libm` (and doesn't really do anything with it.)
    - `c-test.nix` is basically the same thing, but in C. It also links `libm`.
-2. Build each program and test it.
+2. Build each program with <code>NIX_PATH='nixpkgs=https://github.com/NixOS/nixpkgs/archive/refs/heads/nixpkgs-unstable.tar.gz' nix-build <var>lang</var>-test.nix</code> and test it.
 3. Fork the repo on GitHub, and enable actions.
 4. Run the "Test fpc inside Nix" workflow. A job will appear for each of the test files.
 5. The C test will build successfully, but the Free Pascal one will fail with the errors I mentioned above.
-
-(The `.drv`s and build logs for both test programs will be uploaded as artifacts for the workflow.)
+6. The `.drv`s and build logs for both test programs will be uploaded as artifacts for the workflow.
+7. Compare the `.drv`s with the ones from your local system. The names and contents should be identical.
 
 ### Expected behavior
 Free Pascal programs should build identically on both my local system and GitHub - or at least fail identically.
