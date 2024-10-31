@@ -37,7 +37,7 @@ N/A
 <!-- If applicable, add screenshots to help explain your problem. -->
 
 ### Additional context
-N/A
+While my example derivations here have `NIX_DEBUG=7` set, the problem happens without that variable too.
 <!-- Add any other context about the problem here. -->
 
 <!-- ### Notify maintainers -->
