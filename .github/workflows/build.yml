@@ -18,11 +18,12 @@ jobs:
         nix_path: "nixpkgs=https://github.com/NixOS/nixpkgs/archive/refs/heads/nixpkgs-unstable.tar.gz"
     - name: Build
       run: nix-build "$(tr A-Z a-z <<< ${{ matrix.lang }})-test.nix"
-    - name: Upload logs
+    - name: Upload `.drv`s and logs
       if: '!cancelled()'
       uses: actions/upload-artifact@v4
       with:
         name: ${{ matrix.lang }}-build-log
         path: |
+          /nix/store/*aaa-*-test*.drv
           /nix/var/log/nix/drvs/*/*aaa-*-test*
         if-no-files-found: ignore

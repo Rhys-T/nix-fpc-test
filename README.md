@@ -27,7 +27,7 @@ Steps to reproduce the behavior:
 4. Run the "Test fpc inside Nix" workflow. A job will appear for each of the test files.
 5. The C test will build successfully, but the Free Pascal one will fail with the errors I mentioned above.
 
-(The build logs for both test programs will be uploaded as artifacts for the workflow.)
+(The `.drv`s and build logs for both test programs will be uploaded as artifacts for the workflow.)
 
 ### Expected behavior
 Free Pascal programs should build identically on both my local system and GitHub - or at least fail identically.
