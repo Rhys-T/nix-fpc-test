@@ -6,8 +6,12 @@ jobs:
     strategy:
       matrix:
         lang: [C, FPC]
+        suffix: [""]
+        include:
+          - lang: FPC
+            suffix: "-verbose"
       fail-fast: false
-    name: Build ${{ matrix.lang }} program
+    name: Build ${{ matrix.lang }}${{ matrix.suffix }} program
     runs-on: macos-13
     steps:
     - name: Checkout repository
@@ -17,7 +21,7 @@ jobs:
       with:
         nix_path: "nixpkgs=https://github.com/NixOS/nixpkgs/archive/refs/heads/nixpkgs-unstable.tar.gz"
     - name: Build
-      run: nix-build "$(tr A-Z a-z <<< ${{ matrix.lang }})-test.nix"
+      run: nix-build "$(tr A-Z a-z <<< ${{ matrix.lang }})-test${{ matrix.suffix }}.nix"
     - name: Upload `.drv`s and logs
       if: '!cancelled()'
       uses: actions/upload-artifact@v4
