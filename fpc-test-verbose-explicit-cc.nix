@@ -1,4 +1,13 @@
-(import <nixpkgs> {}).callPackage ({stdenv, lib, fpc, writeText}: stdenv.mkDerivation {
+(import <nixpkgs> {}).callPackage ({stdenv, lib, symlinkJoin, makeBinaryWrapper, fpc, writeText}: let
+    fpc-wrapper = symlinkJoin {
+        name = "${lib.getName fpc}-wrapper-${lib.getVersion fpc}";
+        paths = [fpc];
+        nativeBuildInputs = [makeBinaryWrapper];
+        postBuild = ''
+            wrapProgram "$out"/bin/fpc --add-flags '-FD${lib.getBin stdenv.cc}/bin'
+        '';
+    };
+in stdenv.mkDerivation {
     name = "aaa-fpc-test";
     allowSubstitutes = false;
     src = writeText "hello.pas" ''
@@ -9,9 +18,9 @@
         end.
     '';
     dontUnpack = true;
-    nativeBuildInputs = [fpc];
+    nativeBuildInputs = [fpc-wrapper];
     # env.NIX_DEBUG = 7;
-    buildPhase = "fpc -va -FD${lib.getBin stdenv.cc}/bin -o./hello $src";
+    buildPhase = "fpc -va -o./hello $src";
     checkPhase = ''[[ "$(./hello)" == "Hello, world." ]]'';
     doCheck = true;
     installPhase = "install -Dm755 hello $out/bin/hello";
